@@ -18,45 +18,48 @@ int _printf(const char *format, ...)
 	va_start(ap, format);
 	for (i = 0, j = 0; format && format[i]; i++)
 	{
-		if (format[i] == '%' && format[i + 1])
-		{
-			i++;
-			switch (format[i])
+			if (format[i] == '%')
 			{
-				case 'c':
-					x = va_arg(ap, int);
-					if (x)
-					{
+				i++;
+				switch (format[i])
+				{
+					case 'c':
+						x = va_arg(ap, int);
+						if (x)
+						{
+							write(1, &x, 1);
+							j++;
+						}
+						break;
+					case 's':
+						str = va_arg(ap, char *);
+						if (!str)
+							str = "(null)";
+						k = 0;
+						while (str[k])
+							k++;
+						j += k;
+						write(1, str, k);
+						break;
+					case '%':
+						x = '%';
 						write(1, &x, 1);
 						j++;
-					}
-					break;
-				case 's':
-					str = va_arg(ap, char *);
-					if (!str)
-						str = "(null)";
-					k = 0;
-					while (str[k])
-						k++;
-					j += k;
-					write(1, str, k);
-					break;
-				case '%':
-					x = '%';
-					write(1, &x, 1);
-					j++;
-					break;
-				default:
-					write(1, &format[i - 1], 1);
-					write(1, &format[i], 1);
-					j += 2;
+						break;
+					default:
+						if (!format[i])
+							return (j);
+						write(1, &format[i - 1], 1);
+						write(1, &format[i], 1);
+						j += 2;
+						break;
+				}
 			}
-		}
-		else
-		{
-			write(1, &format[i], 1);
-			j++;
-		}
+			else
+			{
+				write(1, &format[i], 1);
+				j++;
+			}
 	}
 	va_end(ap);
 	return (j);
