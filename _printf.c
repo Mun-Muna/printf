@@ -42,6 +42,10 @@ int _printf(const char *format, ...)
 					x = '%';
 					write(1, &x, 1);
 					break;
+				default:
+					j++;
+					write(1, &format[i - 1], 1);
+					write(1, &format[i], 1);
 			}
 		}
 		else
