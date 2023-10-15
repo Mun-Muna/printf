@@ -29,17 +29,14 @@ int _printf(const char *format, ...)
 					j++;
 					break;
 				case 's':
-					if (va_arg(ap, char *) == NULL)
-						return (0);
-					else
-					{	
-						str = va_arg(ap, char *);
-						k = 0;
-						while (str[k])
-							k++;
-						j += k;
-						write(1, str, k);
-					}
+					str = va_arg(ap, char *);
+					if (!str)
+						str = "(null)";
+					k = 0;
+					while (str[k])
+						k++;
+					j += k;
+					write(1, str, k);
 					break;
 				case '%':
 					x = '%';
