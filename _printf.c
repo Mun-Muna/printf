@@ -16,18 +16,17 @@ int _printf(const char *format, ...)
 	char *str;
 
 	va_start(ap, format);
-	for (i = 0; format && format[i]; i++)
+	for (i = 0, j = 0; format && format[i]; i++)
 	{
-		j = 0;
 		if (format[i] == '%' && format[i + 1])
 		{
 			i++;
 			switch (format[i])
 			{
 				case 'c':
-					j++;
 					x = va_arg(ap, int);
 					write(1, &x, 1);
+					j++;
 					break;
 				case 's':
 					str = va_arg(ap, char *);
@@ -38,20 +37,20 @@ int _printf(const char *format, ...)
 					write(1, str, k);
 					break;
 				case '%':
-					j++;
 					x = '%';
 					write(1, &x, 1);
+					j++;
 					break;
 				default:
-					j += 2;
 					write(1, &format[i - 1], 1);
 					write(1, &format[i], 1);
+					j += 2;
 			}
 		}
 		else
 		{
-			j++;
 			write(1, &format[i], 1);
+			j++;
 		}
 	}
 	va_end(ap);
