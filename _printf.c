@@ -25,6 +25,8 @@ int _printf(const char *format, ...)
 			{
 				case 'c':
 					x = va_arg(ap, int);
+					if (!x)
+						x = '\0';
 					write(1, &x, 1);
 					j++;
 					break;
