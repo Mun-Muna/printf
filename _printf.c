@@ -30,6 +30,8 @@ int _printf(const char *format, ...)
 							write(1, &x, 1);
 							j++;
 						}
+						else
+							return (-1);
 						break;
 					case 's':
 						str = va_arg(ap, char *);
