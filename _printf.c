@@ -11,12 +11,8 @@ int _printf(const char *format, ...)
 {
 	va_list ap;
 	int i, j, count = 0;
-	spec specs[] = {
-		{'c', print_char},
-		{'s', print_string},
-		{'%', print_mod},
-		{'\0', NULL}
-	};
+	spec specs[] = {{'c', print_char}, {'s', print_string}, {'%', print_mod},
+		{'\0', NULL}};
 
 	va_start(ap, format);
 	if (!format)
@@ -25,11 +21,9 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if (!format[i + 1])
-				return (-1);
-			else
+			if (format[i + 1])
 			{
-				for(j = 0; j < 3; j++)
+				for (j = 0; j < 3; j++)
 				{
 					if (format[i + 1] == specs[j].c)
 					{
@@ -43,6 +37,9 @@ int _printf(const char *format, ...)
 					write(1, &format[i], 1);
 					count += 1;
 				}
+			else
+				return (-1);
+			}
 		}
 		else
 		{
