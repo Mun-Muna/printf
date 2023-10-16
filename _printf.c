@@ -62,5 +62,7 @@ int _printf(const char *format, ...)
 			}
 	}
 	va_end(ap);
+	if (!format)
+		return (-1);
 	return (j);
 }
