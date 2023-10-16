@@ -1,7 +1,6 @@
 #include "main.h"
-#include <unistd.h>
 #include <stdarg.h>
-#include <stdio.h>
+#include <unistd.h>
 /**
  * _printf - produces output according to a format
  * @format: character string
@@ -11,55 +10,44 @@
 int _printf(const char *format, ...)
 {
 	va_list ap;
-	int i, j, k;
-	char x;
-	char *str;
+	int i, j, count = 0;
+	spec specs[] = {
+		{'c', print_char},
+		{'s', print_string},
+		{'%', print_mod},
+		{'\0', NULL}
+	};
 
 	va_start(ap, format);
-	for (i = 0, j = 0; format && format[i]; i++)
-	{
-			if (format[i] == '%')
-			{
-				i++;
-				switch (format[i])
-				{
-					case 'c':
-						x = va_arg(ap, int);
-						write(1, &x, 1);
-						j++;
-						break;
-					case 's':
-						str = va_arg(ap, char *);
-						if (!str)
-							str = "(null)";
-						k = 0;
-						while (str[k])
-							k++;
-						j += k;
-						write(1, str, k);
-						break;
-					case '%':
-						x = '%';
-						write(1, &x, 1);
-						j++;
-						break;
-					default:
-						if (!format[i])
-							return (-1);
-						write(1, &format[i - 1], 1);
-						write(1, &format[i], 1);
-						j += 2;
-						break;
-				}
-			}
-			else
-			{
-				write(1, &format[i], 1);
-				j++;
-			}
-	}
-	va_end(ap);
 	if (!format)
 		return (-1);
-	return (j);
+	for (i = 0; format[i]; i++)
+	{
+		if (format[i] == '%')
+		{
+			if (!format[i + 1])
+				return (-1);
+			for(j = 0; j < 3; j++)
+			{
+				if (format[i + 1] == specs[j].c)
+				{
+					i++;
+					count += specs[j].f(ap);
+					break;
+				}
+			}
+			if (format[i] == '%')
+			{
+				write(1, &format[i], 1);
+				count += 1;
+			}
+		}
+		else
+		{
+			write(1, &format[i], 1);
+			count += 1;
+		}
+	}
+	va_end(ap);
+	return (count);
 }
