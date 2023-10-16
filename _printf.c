@@ -30,8 +30,6 @@ int _printf(const char *format, ...)
 							write(1, &x, 1);
 							j++;
 						}
-						else
-							return (-1);
 						break;
 					case 's':
 						str = va_arg(ap, char *);
@@ -50,7 +48,7 @@ int _printf(const char *format, ...)
 						break;
 					default:
 						if (!format[i])
-							return (j);
+							return (-1);
 						write(1, &format[i - 1], 1);
 						write(1, &format[i], 1);
 						j += 2;
