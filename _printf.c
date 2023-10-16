@@ -25,11 +25,8 @@ int _printf(const char *format, ...)
 				{
 					case 'c':
 						x = va_arg(ap, int);
-						if (x)
-						{
-							write(1, &x, 1);
-							j++;
-						}
+						write(1, &x, 1);
+						j++;
 						break;
 					case 's':
 						str = va_arg(ap, char *);
