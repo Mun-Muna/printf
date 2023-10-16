@@ -27,20 +27,22 @@ int _printf(const char *format, ...)
 		{
 			if (!format[i + 1])
 				return (-1);
-			for(j = 0; j < 3; j++)
+			else
 			{
-				if (format[i + 1] == specs[j].c)
+				for(j = 0; j < 3; j++)
 				{
-					i++;
-					count += specs[j].f(ap);
-					break;
+					if (format[i + 1] == specs[j].c)
+					{
+						i++;
+						count += specs[j].f(ap);
+						break;
+					}
 				}
-			}
-			if (format[i] == '%')
-			{
-				write(1, &format[i], 1);
-				count += 1;
-			}
+				if (format[i] == '%')
+				{
+					write(1, &format[i], 1);
+					count += 1;
+				}
 		}
 		else
 		{
