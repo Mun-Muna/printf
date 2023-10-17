@@ -24,27 +24,22 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-				i++;
-				if (!format[i])
-					return (-1);
-				for (j = 0; j < 3; j++)
+			if (!format[i + 1])
+				return (-1);
+			for (j = 0; j < 3; j++)
+			{
+				if (format[i + 1] == specs[j].c)
 				{
-					if (format[i] == specs[j].c)
-					{
-						count += specs[j].f(ap);
-						break;
-					}
+					count += specs[j].f(ap);
+					i++;
+					break;
 				}
-				if (!specs[j].c)
-				{
-					count += _write(format[i - 1]);
-					count += _write(format[i]);
-				}
+			}
+			if (!specs[j].c)
+				count += _write(format[i]);
 		}
 		else
-		{
 			count += _write(format[i]);
-		}
 	}
 	va_end(ap);
 	return (count);
