@@ -84,7 +84,7 @@ int print_bin(va_list ap)
 	char arr[8];
 
 	if (n == 0)
-		return (_write('1'));
+		return (_write('0'));
 	for (i = 0; n > 0; i++)
 	{
 		if (n % 2 == 0)
