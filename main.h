@@ -14,8 +14,9 @@ typedef struct specifier
 	int (*f)(va_list ap);
 } spec;
 int _printf(const char *format, ...);
-int print_char(va_list ap);
-int print_string(va_list ap);
+int print_c(va_list ap);
+int print_str(va_list ap);
 int print_mod(va_list ap);
 int print_int(va_list ap);
+int print_bin(va_list ap);
 #endif

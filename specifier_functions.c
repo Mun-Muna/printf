@@ -1,24 +1,24 @@
 #include "main.h"
 #include <unistd.h>
 /**
- * print_char - prints corrseponding character in argument list
+ * print_c - prints corrseponding character in argument list
  * @ap: list of arguments, type va_list
  *
  * Return: number of characters printed
  */
-int print_char(va_list ap)
+int print_c(va_list ap)
 {
 	char c = va_arg(ap, int);
 
 	return (write(1, &c, 1));
 }
 /**
- * print_string - prints corrseponding character in argument list
+ * print_str - prints corrseponding character in argument list
  * @ap: list of arguments, type va_list
  *
  * Return: number of characters printed
  */
-int print_string(va_list ap)
+int print_str(va_list ap)
 {
 	char *str = va_arg(ap, char *);
 	int i = 0;
@@ -54,8 +54,8 @@ int print_mod(va_list ap)
 int print_int(va_list ap)
 {
 	int count = 0, i = 1;
-	char digit;
 	long int n = va_arg(ap, int);
+	char digit;
 
 	if (n < 0)
 	{
@@ -68,6 +68,35 @@ int print_int(va_list ap)
 	{
 		digit = ((n / i) % 10) + '0';
 		count += _write(digit);
+	}
+	return (count);
+}
+/**
+ * print_bin - print in binary form
+ * @ap: list of arguments of type va_list
+ *
+ * Return: number of characters printed
+ */
+int print_bin(va_list ap)
+{
+	unsigned int n = va_arg(ap, unsigned int);
+	int i, count = 0;
+	char arr[8];
+
+	if (n == 0)
+		return (_write('1'));
+	for (i = 0; n > 0; i++)
+	{
+		if (n % 2 == 0)
+			arr[i] = '0';
+		else
+			arr[i] = '1';
+		n /= 2;
+	}
+	arr[i] = '\0';
+	while ((i--) >= 0)
+	{
+		count += _write(arr[i]);
 	}
 	return (count);
 }
