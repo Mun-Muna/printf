@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
 	va_list ap;
 	int i, j, count = 0;
 	spec specs[] = {{'c', print_char}, {'s', print_string}, {'%', print_mod},
-		{'\0', NULL}};
+		{'d', print_int}, {'i', print_int}, {'\0', NULL}};
 
 	va_start(ap, format);
 	if (!format)
@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 		{
 			if (!format[i + 1])
 				return (-1);
-			for (j = 0; j < 3; j++)
+			for (j = 0; specs[j].c; j++)
 			{
 				if (format[i + 1] == specs[j].c)
 				{
