@@ -32,14 +32,14 @@ int _printf(const char *format, ...)
 						break;
 					}
 				}
-				if (format[i] == '%')
+				if (j == 3)
 				{
 					write(1, &format[i], 1);
 					count += 1;
 				}
+			}
 			else
 				return (-1);
-			}
 		}
 		else
 		{
