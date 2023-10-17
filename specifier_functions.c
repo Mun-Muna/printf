@@ -93,7 +93,6 @@ int print_bin(va_list ap)
 			arr[i] = '1';
 		n /= 2;
 	}
-	arr[i] = '\0';
 	while ((i--) >= 0)
 	{
 		count += _write(arr[i]);
