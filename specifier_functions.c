@@ -55,7 +55,7 @@ int print_int(va_list ap)
 {
 	int count = 0, i = 1;
 	char digit;
-	int n = va_arg(ap, int);
+	long int n = va_arg(ap, int);
 
 	if (n < 0)
 	{
