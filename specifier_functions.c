@@ -10,8 +10,7 @@ int print_char(va_list ap)
 {
 	char c = va_arg(ap, int);
 
-	write(1, &c, 1);
-	return (1);
+	return(write(1, &c, 1));
 }
 /**
  * print_string - prints corrseponding character in argument list
@@ -27,9 +26,11 @@ int print_string(va_list ap)
 	if (!str)
 		str = "(null)";
 	while (str[i])
+	{
+		write(1, &str[i], 1);
 		i++;
-	write(1, str, i);
-	return (i);
+	}
+	return(i);
 }
 /**
  * print_mod - prints modulo sign
@@ -42,6 +43,5 @@ int print_mod(va_list ap)
 	char c = '%';
 	(void) ap;
 
-	write(1, &c, 1);
-	return (1);
+	return(write(1, &c, 1));
 }
