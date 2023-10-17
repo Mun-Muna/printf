@@ -81,7 +81,7 @@ int print_bin(va_list ap)
 {
 	unsigned int n = va_arg(ap, unsigned int);
 	int i, count = 0;
-	char arr[8];
+	char arr[34];
 
 	if (n == 0)
 		return (_write('0'));
