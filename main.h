@@ -6,6 +6,7 @@
  * @_c: conversion specifier
  * @f: the function associated
  */
+int _write(char c);
 typedef struct specifier
 {
 	char c;

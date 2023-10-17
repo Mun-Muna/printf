@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
 /**
@@ -16,35 +17,33 @@ int _printf(const char *format, ...)
 
 	va_start(ap, format);
 	if (!format)
+	{
 		return (-1);
+	}
 	for (i = 0; format[i]; i++)
 	{
 		if (format[i] == '%')
 		{
-			if (format[i + 1])
-			{
+				i++;
+				if (!format[i])
+					return (-1);
 				for (j = 0; j < 3; j++)
 				{
-					if (format[i + 1] == specs[j].c)
+					if (format[i] == specs[j].c)
 					{
-						i++;
 						count += specs[j].f(ap);
 						break;
 					}
 				}
-				if (j == 3)
+				if (!specs[j].c)
 				{
-					write(1, &format[i], 1);
-					count += 1;
+					count += _write(format[i - 1]);
+					count += _write(format[i]);
 				}
-			}
-			else
-				return (-1);
 		}
 		else
 		{
-			write(1, &format[i], 1);
-			count += 1;
+			count += _write(format[i]);
 		}
 	}
 	va_end(ap);
