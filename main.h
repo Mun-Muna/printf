@@ -20,4 +20,6 @@ int print_mod(va_list ap);
 int print_int(va_list ap);
 int print_bin(va_list ap);
 int print_unsigned(va_list ap);
+int print_octal(va_list ap);
+
 #endif

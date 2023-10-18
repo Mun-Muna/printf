@@ -14,7 +14,7 @@ int _printf(const char *format, ...)
 	int i, j, count = 0;
 	spec specs[] = {{'c', print_c}, {'s', print_str}, {'%', print_mod},
 		{'d', print_int}, {'i', print_int}, {'b', print_bin}, {'u', print_unsigned},
-		{'\0', NULL}};
+		{'o', print_octal}, {'\0', NULL}};
 
 	va_start(ap, format);
 	if (!format)
