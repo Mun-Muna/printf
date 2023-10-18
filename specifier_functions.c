@@ -1,6 +1,7 @@
 #include "main.h"
 #include <unistd.h>
 #include <stdint.h>
+#include <stdio.h>
 /**
  * print_c - prints corrseponding character in argument list
  * @ap: list of arguments, type va_list
@@ -80,14 +81,15 @@ int print_int(va_list ap)
  */
 int print_bin(va_list ap)
 {
-	int n = va_arg(ap, int);
+	unsigned int n = va_arg(ap, unsigned int);
 	int i, count = 0;
 	char arr[64];
 
-	if (n < 0)
-		return (-1);
 	if (n == 0)
-		return (_write('0'));
+	{
+		count = _write('0');
+		return (count - 1);
+	}
 	for (i = 0; n > 0; i++)
 	{
 		if (n % 2 == 0)
@@ -96,9 +98,10 @@ int print_bin(va_list ap)
 			arr[i] = '1';
 		n /= 2;
 	}
-	while ((i--) >= 0)
+	while ((--i) >= 0)
 	{
 		count += _write(arr[i]);
 	}
-	return (count);
+	return (count - 1);
 }
+
