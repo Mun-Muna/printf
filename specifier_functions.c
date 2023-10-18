@@ -82,7 +82,7 @@ int print_int(va_list ap)
 int print_bin(va_list ap)
 {
 	unsigned int n = va_arg(ap, unsigned int);
-	int i, j;
+	int i, count = 0;
 	char arr[64];
 
 	if (n == 0)
@@ -95,11 +95,10 @@ int print_bin(va_list ap)
 			arr[i] = '1';
 		n /= 2;
 	}
-	j = i;
-	while ((--j) >= 0)
+	while ((--i) >= 0)
 	{
-		count += _write(arr[j]);
+		count += _write(arr[i]);
 	}
-	return (i);
+	return (count);
 }
 

@@ -42,6 +42,5 @@ int _printf(const char *format, ...)
 			count += _write(format[i]);
 	}
 	va_end(ap);
-	printf("%dthis\n", count);
 	return (count);
 }
