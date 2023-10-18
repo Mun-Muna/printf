@@ -101,4 +101,3 @@ int print_bin(va_list ap)
 	}
 	return (count);
 }
-
