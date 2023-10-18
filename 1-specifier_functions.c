@@ -53,7 +53,7 @@ int print_octal(va_list ap)
 }
 /**
  * print_hexa - prints int in hexadecimal
- * @ap: list of arguments            	
+ * @ap: list of arguments
  *
  * Return: number of characters print
  */
@@ -86,7 +86,7 @@ int print_hexa(va_list ap)
 }
 /**
  * print_HEXA - prints int in hexadecimal
- * @ap: list of arguments            	
+ * @ap: list of arguments
  *
  * Return: number of characters print
  */
@@ -114,6 +114,33 @@ int print_HEXA(va_list ap)
 	while ((--i) >= 0)
 	{
 		count += _write(arr[i]);
+	}
+	return (count);
+}
+/**
+ * print_STR - prints string
+ * @ap: list of arguments
+ *
+ * Return: number of characters
+ */
+int print_STR(va_list ap)
+{
+	char *str = va_arg(ap, char *);
+	int i, count = 0;
+
+	if (!str)
+		str = "(null)";
+	while (str[i])
+	{
+		if ((str[i] > 0 && str[i] < 32) || str[i] >= 127)
+		{
+			count += _write('\\');
+			count += _write('x');
+			count += _printf("%X", _printf("%d", str[i]));
+		}
+		else
+			count += write(1, &str[i], 1);
+		i++;
 	}
 	return (count);
 }

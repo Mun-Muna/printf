@@ -23,4 +23,5 @@ int print_unsigned(va_list ap);
 int print_octal(va_list ap);
 int print_hexa(va_list ap);
 int print_HEXA(va_list ap);
+int print_STR(va_list ap);
 #endif
