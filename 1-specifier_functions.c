@@ -136,7 +136,7 @@ int print_STR(va_list ap)
 		{
 			count += _write('\\');
 			count += _write('x');
-			count += _printf("%X", _printf("%d", str[i]));
+			count += _printf("%X", str[i]);
 		}
 		else
 			count += write(1, &str[i], 1);
