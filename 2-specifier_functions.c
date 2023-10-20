@@ -4,7 +4,7 @@
 #include "main.h"
 #include <stdio.h>
 /**
- * print_unsigned - prints unsigned int
+ * print_rev - prints reversed string
  * @ap: list of arguments
  *
  * Return: number of characters printed
