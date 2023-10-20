@@ -11,20 +11,17 @@
  */
 int print_rev(va_list ap)
 {
-	char *str1 = va_arg(ap, char*);
-	int i, j, count = 0;
-	char *str2;
+	char *str = va_arg(ap, char*);
+	int i, count = 0;
 
-	if (!str1)
-		return (-1);
-	for (i = 0; str1[i]; i++)
-	{}
-	str2 = malloc(i);
-	while ((--i) >= 0)
+	if (!str)
 	{
-		str2[j] = str1[i];
-		count += _write(str2[j]);
-		j++;
+		str = "(null)";
+		return (write(1, str, 6));
 	}
+	for (i = 0; str[i]; i++)
+	{}
+	while ((--i) >= 0)
+		count += _write(str[i]);
 	return (count);
 }
