@@ -15,7 +15,7 @@ int _printf(const char *format, ...)
 	spec specs[] = {{'c', print_c}, {'s', print_str}, {'%', print_mod},
 		{'d', print_int}, {'i', print_int}, {'b', print_bin}, {'u', print_unsigned},
 		{'o', print_octal}, {'x', print_hexa}, {'X', print_HEXA}, {'S', print_STR},
-		{'r', print_rev}, {'\0', NULL}};
+		{'r', print_rev}, {'R', print_rot13}, {'\0', NULL}};
 
 	va_start(ap, format);
 	if (!format)
