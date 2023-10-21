@@ -129,7 +129,7 @@ int print_STR(va_list ap)
 	int i, count = 0;
 
 	if (!str)
-		count += write(1, "(null)", 6);
+		return (write(1, "(null)", 6));
 	for (i = 0; str[i]; i++)
 	{
 		if ((str[i] > 0 && str[i] < 32) || str[i] >= 127)
@@ -140,6 +140,5 @@ int print_STR(va_list ap)
 		else
 			count += _write(str[i]);
 	}
-	printf("%d", count);
 	return (count);
 }
