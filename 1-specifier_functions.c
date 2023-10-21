@@ -135,6 +135,8 @@ int print_STR(va_list ap)
 		if ((str[i] > 0 && str[i] < 32) || str[i] >= 127)
 		{
 			count += write(1, "\\x", 2);
+			if (str[i] > 0 && str[i] < 16)
+				count += _write('0');
 			count += _printf("%X", str[i]);
 		}
 		else
