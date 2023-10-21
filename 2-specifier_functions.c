@@ -34,18 +34,24 @@ int print_rev(va_list ap)
 int print_rot13(va_list ap)
 {
 	char *str = va_arg(ap, char *);
-	int i, count = 0;
+	char a[52] = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
+	char b[52] = "NnOoPpQqRrSsTtUuVvWwXxYyZzAaBbCcDdEeFfGgHhIiJjKkLlMm";
+	int i, j;
 
 	if (!str)
 		str = "(null)";
-	for (; str[i]; i++)
+	for (i = 0; str[i]; i++)
 	{
-		if ((str[i] >= 'A' && str[i] <= 'M') || (str[i] >= 'a' && str[i] <= 'm'))
-			str[i] += 13;
-		else
-			if ((str[i] >= 'N' && str[i] <= 'Z') || (str[i] >= 'n' && str[i] <= 'z'))
-			str[i] -= 13;
-		count += _write(str[i]);
+		if (str[i] < 'A' || (str[i] > 'Z' && str[i] < 'a') || str[i] > 'z')
+			_write(str[i]);
+		for (j = 0; j < 52; j++)
+		{
+			if (str[i] == a[j])
+			{
+				_write(b[j]);
+				break;
+			}
+		}
 	}
-	return (count);
+	return (i);
 }
