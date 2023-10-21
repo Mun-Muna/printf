@@ -129,18 +129,17 @@ int print_STR(va_list ap)
 	int i, count = 0;
 
 	if (!str)
-		str = "(null)";
-	while (str[i])
+		count += write(1, "(null)", 6);
+	for (i = 0; str[i]; i++)
 	{
 		if ((str[i] > 0 && str[i] < 32) || str[i] >= 127)
 		{
-			count += _write('\\');
-			count += _write('x');
+			count += write(1, "\\x", 2);
 			count += _printf("%X", str[i]);
 		}
 		else
-			count += write(1, &str[i], 1);
-		i++;
+			count += _write(str[i]);
 	}
+	printf("%d", count);
 	return (count);
 }
